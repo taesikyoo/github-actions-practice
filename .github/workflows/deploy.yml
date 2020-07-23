@@ -2,8 +2,8 @@ name: Deploy Spring boot to AWS EC2
 
 on:
   push:
-  branches:
-  - master
+    branches:
+      - master
 
 env:
   PROJECT_NAME: github-actions-practice
