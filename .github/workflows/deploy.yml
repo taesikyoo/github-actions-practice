@@ -31,6 +31,11 @@ jobs:
         run: ./gradlew build
         shell: bash
 
+      - name : Show current directory
+        run: pwd
+      - name : List results
+        run: ls
+      
       - name: Make zip file
         run: zip -qq -r ./$GITHUB_SHA.zip .
         shell: bash
