@@ -7,7 +7,7 @@ on:
 
 env:
   PROJECT_NAME: github-actions-practice
-  BUCKET: freelec-springboot-build-ts
+  BUCKET: github-actions-exercise-build
 
 jobs:
   deploy:
@@ -30,11 +30,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
         shell: bash
-
-      - name : Show current directory
-        run: pwd
-      - name : List results
-        run: ls
       
       - name: Make zip file
         run: zip -qq -r ./$GITHUB_SHA.zip .
