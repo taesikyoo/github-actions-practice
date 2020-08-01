@@ -32,16 +32,16 @@ jobs:
         shell: bash
 
       - name: MAKE DEPLOYMENT DIR
-        run: mkdir -p deploy
+        run: mkdir -p code-deploy-${PROJECT_NAME}
 
       - name: MOVE DEPLOY CODE DEPLOY SCRIPT
-        run: cp code-deploy/* deploy/
+        run: cp ${PROJECT_NAME}/code-deploy/* code-deploy-${PROJECT_NAME}/
 
       - name: MOVE BUILD JAR
-        run: cp build/libs/*.jar deploy/
+        run: cp ${PROJECT_NAME}/build/libs/*.jar code-deploy-${PROJECT_NAME}/
       
       - name: Make zip file
-        run: zip -qq -r ./$GITHUB_SHA.zip deploy/
+        run: zip -r -j code-deploy-${PROJECT_NAME} code-deploy-${PROJECT_NAME}/*
         shell: bash
 
       - name: Configure AWS credentials
@@ -52,7 +52,7 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$BUCKET/$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp code-deploy-${PROJECT_NAME}.zip s3://${BUCKET}/${PROJECT_NAME}/${PROJECT_NAME}-${GITHUB_SHA}.zip --region ap-northeast-2
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name github-actions-practice --deployment-group-name dev --region ap-northeast-2 --s3-location bucket=$BUCKET,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name ${PROJECT_NAME}-deploy --deployment-group-name ${PROJECT_NAME}-deploy-group --region ap-northeast-2 --s3-location bucket=${BUCKET},bundleType=zip,key=${PROJECT_NAME}/${PROJECT_NAME}-${GITHUB_SHA}.zip
