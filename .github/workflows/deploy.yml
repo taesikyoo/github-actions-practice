@@ -30,9 +30,18 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
         shell: bash
+
+      - name: MAKE DEPLOYMENT DIR
+        run: mkdir -p deploy
+
+      - name: MOVE DEPLOY CODE DEPLOY SCRIPT
+        run: cp scripts/*.sh deploy/
+
+      - name: MOVE BUILD JAR
+        run: cp build/libs/*.jar deploy/
       
       - name: Make zip file
-        run: zip -qq -r ./$GITHUB_SHA.zip .
+        run: zip -qq -r ./$GITHUB_SHA.zip /deploy
         shell: bash
 
       - name: Configure AWS credentials
