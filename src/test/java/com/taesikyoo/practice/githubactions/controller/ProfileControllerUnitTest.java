@@ -42,7 +42,7 @@ public class ProfileControllerUnitTest {
     @Test
     public void active_profile이_없으면_default가_조회된다() {
         //given
-        String expectedProfile = "real1";
+        String expectedProfile = "real2";
         MockEnvironment env = new MockEnvironment();
         ProfileController controller = new ProfileController(env);
 
