@@ -35,13 +35,13 @@ jobs:
         run: mkdir -p deploy
 
       - name: MOVE DEPLOY CODE DEPLOY SCRIPT
-        run: cp scripts/*.sh deploy/
+        run: cp code-deploy/* deploy/
 
       - name: MOVE BUILD JAR
         run: cp build/libs/*.jar deploy/
       
       - name: Make zip file
-        run: zip -qq -r ./$GITHUB_SHA.zip /deploy
+        run: zip -qq -r ./$GITHUB_SHA.zip deploy/
         shell: bash
 
       - name: Configure AWS credentials
