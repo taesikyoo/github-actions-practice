@@ -35,10 +35,10 @@ jobs:
         run: mkdir -p code-deploy-${PROJECT_NAME}
 
       - name: MOVE DEPLOY CODE DEPLOY SCRIPT
-        run: cp /code-deploy/* code-deploy-${PROJECT_NAME}/
+        run: cp code-deploy/* code-deploy-${PROJECT_NAME}/
 
       - name: MOVE BUILD JAR
-        run: cp /build/libs/*.jar code-deploy-${PROJECT_NAME}/
+        run: cp build/libs/*.jar code-deploy-${PROJECT_NAME}/
       
       - name: Make zip file
         run: zip -r -j code-deploy-${PROJECT_NAME} code-deploy-${PROJECT_NAME}/*
