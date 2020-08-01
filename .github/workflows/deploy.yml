@@ -55,4 +55,4 @@ jobs:
         run: aws s3 cp code-deploy-${PROJECT_NAME}.zip s3://${BUCKET}/${PROJECT_NAME}/${PROJECT_NAME}-${GITHUB_SHA}.zip --region ap-northeast-2
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name ${PROJECT_NAME}-deploy --deployment-group-name ${PROJECT_NAME}-deploy-group --region ap-northeast-2 --s3-location bucket=${BUCKET},bundleType=zip,key=${PROJECT_NAME}/${PROJECT_NAME}-${GITHUB_SHA}.zip
+        run: aws deploy create-deployment --application-name github-actions-practice --deployment-group-name dev --region ap-northeast-2 --s3-location bucket=${BUCKET},bundleType=zip,key=${PROJECT_NAME}/${PROJECT_NAME}-${GITHUB_SHA}.zip
