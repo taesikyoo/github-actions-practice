@@ -19,7 +19,7 @@ class HelloControllerTest {
 
     @Test
     void hello가_리턴된다() throws Exception {
-        String hello = "hello autumn";
+        String hello = "Hello, Github Actions!";
 
         mvc.perform(get("/"))
                 .andExpect(status().isOk())
